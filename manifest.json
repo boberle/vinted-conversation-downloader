@@ -1,0 +1,37 @@
+{
+  "manifest_version": 2,
+  "name": "Vinted Conversation Data Downloader",
+  "version": "0.1",
+  "description": "Downloads conversation data from Vinted",
+  "permissions": ["activeTab"],
+  "icons": {
+    "48": "icons/icon48.png"
+  },
+  "page_action": {
+    "default_icon": "icons/icon32.png",
+    "default_popup": "popup.html",
+    "default_title": "Vinted Conversation Data Downloader",
+    "show_matches": [
+      "https://www.vinted.fr/inbox/*",
+      "https://www.vinted.at/inbox/*",
+      "https://www.vinted.be/inbox/*",
+      "https://www.vinted.cz/inbox/*",
+      "https://www.vinted.de/inbox/*",
+      "https://www.vinted.dk/inbox/*",
+      "https://www.vinted.es/inbox/*",
+      "https://www.vinted.fi/inbox/*",
+      "https://www.vinted.hr/inbox/*",
+      "https://www.vinted.hu/inbox/*",
+      "https://www.vinted.it/inbox/*",
+      "https://www.vinted.lt/inbox/*",
+      "https://www.vinted.lu/inbox/*",
+      "https://www.vinted.nl/inbox/*",
+      "https://www.vinted.pl/inbox/*",
+      "https://www.vinted.pt/inbox/*",
+      "https://www.vinted.ro/inbox/*",
+      "https://www.vinted.se/inbox/*",
+      "https://www.vinted.si/inbox/*",
+      "https://www.vinted.com/inbox/*"
+    ]
+  }
+}
