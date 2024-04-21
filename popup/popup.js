@@ -13,4 +13,4 @@ const listenForClicks = async () => {
   });
 };
 
-browser.tabs.executeScript({ file: "/action.js" }).then(listenForClicks);
+browser.tabs.executeScript({ file: "/content_scripts/download.js" }).then(listenForClicks);

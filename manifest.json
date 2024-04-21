@@ -9,7 +9,7 @@
   },
   "page_action": {
     "default_icon": "icons/icon32.png",
-    "default_popup": "popup.html",
+    "default_popup": "popup/popup.html",
     "default_title": "Vinted Conversation Data Downloader",
     "show_matches": [
       "https://www.vinted.fr/inbox/*",
