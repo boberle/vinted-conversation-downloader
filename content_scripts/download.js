@@ -4,8 +4,8 @@
   }
   window.hasRun = true;
 
-  const download = (data, filename) => {
-    const blob = new Blob([data], { type: "application/json" });
+  const download = (data, filename, mimeType) => {
+    const blob = new Blob([data], { type: mimeType });
     const link = document.createElement("a");
     link.download = filename;
     link.href = window.URL.createObjectURL(blob);
@@ -30,7 +30,8 @@
       const filename = `vinted-conversation-${conversationId}.json`;
       const fetched = await fetch(conversationUrl);
       const data = await fetched.text();
-      download(data, filename);
+      download(data, filename, "application/json");
+
     } else if (message.command === "download-shipment") {
       const [conversationId, conversationUrl, tld] = getConversationUrl();
       const fetched = await fetch(conversationUrl);
@@ -41,10 +42,25 @@
         const shipmentUrl = `https://www.vinted.${tld}/api/v2/transactions/${shipmentId}/shipment/journey_summary`;
         const shipmentFetched = await fetch(shipmentUrl);
         const shipmentData = await shipmentFetched.text();
-        download(shipmentData, filename);
+        download(shipmentData, filename, "application/json");
       } else {
         throw new Error("No shipment ID found");
       }
+
+    } else if (message.command === "download-images") {
+      const [conversationId, conversationUrl, tld] = getConversationUrl();
+      const fetched = await fetch(conversationUrl);
+      const data = await fetched.json();
+      data?.conversation?.messages?.forEach(message => {
+        message.entity?.photos?.forEach(async photo => {
+          const filename = `vinted-conversation-${conversationId}-photo-${photo.id}.jpg`;
+          const photoUrl = photo.full_size_url;
+          const photoFetched = await fetch(photoUrl);
+          const photoData = await photoFetched.arrayBuffer();
+          download(photoData, filename, "application/octet-stream");
+          console.log(photoUrl, filename);
+        })
+      })
     }
   });
 })();

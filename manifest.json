@@ -3,7 +3,10 @@
   "name": "Vinted Conversation Data Downloader",
   "version": "0.1",
   "description": "Downloads conversation data from Vinted",
-  "permissions": ["activeTab"],
+  "permissions": [
+    "activeTab",
+    "https://images1.vinted.net/*"
+  ],
   "icons": {
     "48": "icons/icon48.png"
   },
