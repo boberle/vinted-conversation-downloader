@@ -8,7 +8,9 @@
     "https://images1.vinted.net/*"
   ],
   "icons": {
-    "48": "icons/icon48.png"
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "96": "icons/icon96.png"
   },
   "page_action": {
     "default_icon": "icons/icon32.png",
