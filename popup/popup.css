@@ -8,3 +8,11 @@ button {
     color: red;
     display: none;
 }
+
+#item-div {
+    display: none;
+}
+
+#inbox-div {
+    display: none;
+}

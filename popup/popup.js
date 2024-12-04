@@ -13,4 +13,34 @@ const listenForClicks = async () => {
   });
 };
 
+
+document.addEventListener('DOMContentLoaded', function() {
+    const setContent = (divId) => {
+        document.querySelector("#default-div").style.display = "none";
+        document.querySelector("#item-div").style.display = "none";
+        document.querySelector("#inbox-div").style.display = "none";
+        document.querySelector(`#${divId}`).style.display = "block";
+    }
+
+  browser.tabs.query({ active: true, currentWindow: true })
+      .then(tabs => {
+        const activeTab = tabs[0];
+        const activeTabUrl = activeTab.url;
+          if (activeTabUrl.includes("/items/")) {
+              setContent("item-div");
+          } else if (activeTabUrl.includes("/inbox/")) {
+              setContent("inbox-div");
+          } else {
+              setContent("default-div");
+          }
+      })
+      .catch(error => {
+          console.error('Error retrieving active tab:', error);
+          setContent("default-div");
+      });
+});
+
+
+
+
 browser.tabs.executeScript({ file: "/content_scripts/download.js" }).then(listenForClicks);

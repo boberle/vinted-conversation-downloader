@@ -24,6 +24,16 @@
     return [conversationId, conversationUrl, tld];
   };
 
+  const getProductUrl = () => {
+    const productId = window.location.href.match(/(?<=\/)\d+(?=-)/).pop();
+    const tld = window.location.host
+        .match(/\.[a-z]+$/)
+        .pop()
+        .slice(1);
+    const productUrl = `https://www.vinted.${tld}/api/v2/items/${productId}?localize=false&noredirect=1`;
+    return [productId, productUrl, tld];
+  };
+
   browser.runtime.onMessage.addListener(async (message) => {
     if (message.command === "download-conversation") {
       const [conversationId, conversationUrl] = getConversationUrl();
@@ -60,6 +70,42 @@
           download(photoData, filename, "application/octet-stream");
         })
       })
+
+    } else if (message.command === "download-product") {
+      const [productId, productUrl] = getProductUrl();
+      const filename = `vinted-item-${productId}.json`;
+      const fetched = await fetch(productUrl);
+      const data = await fetched.text();
+      download(data, filename, "application/json");
+
+    } else if (message.command === "download-summary") {
+      const [productId, productUrl] = getProductUrl();
+      const filename = `vinted-item-${productId}-summary.txt`;
+      const fetched = await fetch(productUrl);
+      const data = await fetched.json();
+      const summary = (
+          `id: ${productId}\n` +
+          `source: ${productUrl}\n` +
+          `title: ${data?.item?.title}\n` +
+          `description: ${data?.item?.description}\n` +
+          `seller: ${data?.item?.user?.login}\n` +
+          `seller id: ${data?.item?.user?.id}`
+      )
+      download(summary, filename, "text/plain");
+
+    } else if (message.command === "download-photos") {
+      const [productId, productUrl, tld] = getProductUrl();
+      const fetched = await fetch(productUrl);
+      const data = await fetched.json();
+      data?.item?.photos?.forEach(async photo => {
+        const filename = `vinted-item-${productId}-photo-${photo.id}.jpg`;
+        const photoUrl = photo.full_size_url;
+        const photoFetched = await fetch(photoUrl);
+        const photoData = await photoFetched.arrayBuffer();
+        download(photoData, filename, "application/octet-stream");
+        console.log(photoUrl, filename);
+      })
     }
+
   });
 })();

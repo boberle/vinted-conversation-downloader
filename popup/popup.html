@@ -5,7 +5,10 @@
         <link rel="stylesheet" href="popup.css" />
     </head>
     <body>
-        <div>
+        <div id="default-div">
+            Please navigate to a conversation or an object.
+        </div>
+        <div id="inbox-div">
             Download conversion data as JSON:
             <br />
             <button id="download-conversation">Download conversation</button>
@@ -13,6 +16,15 @@
             <button id="download-shipment">Download shipment information</button>
             <br />
             <button id="download-images">Download images</button>
+        </div>
+        <div id="item-div">
+            Download product data:
+            <br />
+            <button id="download-product">Download product info (json)</button>
+            <br />
+            <button id="download-summary">Download summary (text)</button>
+            <br />
+            <button id="download-photos">Download photos</button>
         </div>
         <div id="error">An error occurred.</div>
         <script src="popup.js"></script>
