@@ -1,20 +1,20 @@
 const listenForClicks = async () => {
-  document.querySelectorAll("button").forEach((button) => {
-    button.addEventListener("click", () => {
-      const command = button.id;
-      browser.tabs
-        .query({ active: true, currentWindow: true })
-        .then((tabs) => browser.tabs.sendMessage(tabs[0].id, { command }))
-        .then(() => (document.querySelector("#error").style.display = "none"))
-        .catch(
-          () => (document.querySelector("#error").style.display = "block"),
-        );
+    document.querySelectorAll("button").forEach((button) => {
+        button.addEventListener("click", () => {
+            const command = button.id;
+            browser.tabs
+                .query({active: true, currentWindow: true})
+                .then((tabs) => browser.tabs.sendMessage(tabs[0].id, {command}))
+                .then(() => (document.querySelector("#error").style.display = "none"))
+                .catch(
+                    () => (document.querySelector("#error").style.display = "block"),
+                );
+        });
     });
-  });
 };
 
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const setContent = (divId) => {
         document.querySelector("#default-div").style.display = "none";
         document.querySelector("#item-div").style.display = "none";
@@ -22,25 +22,23 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelector(`#${divId}`).style.display = "block";
     }
 
-  browser.tabs.query({ active: true, currentWindow: true })
-      .then(tabs => {
-        const activeTab = tabs[0];
-        const activeTabUrl = activeTab.url;
-          if (activeTabUrl.includes("/items/")) {
-              setContent("item-div");
-          } else if (activeTabUrl.includes("/inbox/")) {
-              setContent("inbox-div");
-          } else {
-              setContent("default-div");
-          }
-      })
-      .catch(error => {
-          console.error('Error retrieving active tab:', error);
-          setContent("default-div");
-      });
+    browser.tabs.query({active: true, currentWindow: true})
+        .then(tabs => {
+            const activeTab = tabs[0];
+            const activeTabUrl = activeTab.url;
+            if (activeTabUrl.includes("/items/")) {
+                setContent("item-div");
+            } else if (activeTabUrl.includes("/inbox/")) {
+                setContent("inbox-div");
+            } else {
+                setContent("default-div");
+            }
+        })
+        .catch(error => {
+            console.error('Error retrieving active tab:', error);
+            setContent("default-div");
+        });
 });
 
 
-
-
-browser.tabs.executeScript({ file: "/content_scripts/download.js" }).then(listenForClicks);
+browser.tabs.executeScript({file: "/content_scripts/download.js"}).then(listenForClicks);
