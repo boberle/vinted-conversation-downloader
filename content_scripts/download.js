@@ -58,7 +58,6 @@
           const photoFetched = await fetch(photoUrl);
           const photoData = await photoFetched.arrayBuffer();
           download(photoData, filename, "application/octet-stream");
-          console.log(photoUrl, filename);
         })
       })
     }
