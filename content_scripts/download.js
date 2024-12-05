@@ -4,6 +4,9 @@
     }
     window.hasRun = true;
 
+    /*
+    Actually make the download the given data when the user clicks on a button.
+     */
     const download = (data, filename, mimeType) => {
         const blob = new Blob([data], {type: mimeType});
         const link = document.createElement("a");
@@ -14,6 +17,9 @@
         document.body.removeChild(link);
     };
 
+    /*
+    Get the URL of the JSON containing the conversation data.
+     */
     const getConversationUrl = () => {
         const conversationId = window.location.href.match(/\d+$/).pop();
         const tld = window.location.host
@@ -24,6 +30,9 @@
         return [conversationId, conversationUrl, tld];
     };
 
+    /*
+    Get the URL of the JSON containing the product data.
+     */
     const getProductUrl = () => {
         const productId = window.location.href.match(/(?<=\/)\d+(?=-)/).pop();
         const tld = window.location.host
@@ -34,6 +43,9 @@
         return [productId, productUrl, tld];
     };
 
+    /*
+    Respond to messages from the popup (the user has clicked on a download button).
+     */
     browser.runtime.onMessage.addListener(async (message) => {
         if (message.command === "download-conversation") {
             const [conversationId, conversationUrl] = getConversationUrl();

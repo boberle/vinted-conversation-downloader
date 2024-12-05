@@ -1,3 +1,6 @@
+/*
+Add a click event listener to each button in the popup.
+ */
 const listenForClicks = async () => {
     document.querySelectorAll("button").forEach((button) => {
         button.addEventListener("click", () => {
@@ -14,6 +17,9 @@ const listenForClicks = async () => {
 };
 
 
+/*
+Show or hide the appropriate content div based on the active tab URL.
+ */
 document.addEventListener('DOMContentLoaded', function () {
     const setContent = (divId) => {
         document.querySelector("#default-div").style.display = "none";
