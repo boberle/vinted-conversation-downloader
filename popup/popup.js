@@ -34,8 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 setContent("default-div");
             }
         })
-        .catch(error => {
-            console.error('Error retrieving active tab:', error);
+        .catch(() => {
             setContent("default-div");
         });
 });
