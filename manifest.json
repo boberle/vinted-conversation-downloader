@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name": "Vinted Downloader",
+  "name": "Vinted Photo and Data Downloader",
   "version": "1.0",
   "description": "Download photos, item descriptions, and conversations from Vinted",
   "permissions": [
@@ -23,7 +23,7 @@
       "96": "icons/icon96.png"
     },
     "default_popup": "popup/popup.html",
-    "default_title": "Vinted Downloader",
+    "default_title": "Vinted Photo and Data Downloader",
     "show_matches": [
       "https://www.vinted.fr/inbox/*",
       "https://www.vinted.fr/items/*",
