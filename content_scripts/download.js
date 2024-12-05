@@ -67,7 +67,7 @@
                     const photoUrl = photo.full_size_url;
                     const photoFetched = await fetch(photoUrl);
                     const photoData = await photoFetched.arrayBuffer();
-                    download(photoData, filename, "application/octet-stream");
+                    download(photoData, filename, "image/jpeg");
                 })
             })
 
@@ -102,7 +102,7 @@
                 const photoUrl = photo.full_size_url;
                 const photoFetched = await fetch(photoUrl);
                 const photoData = await photoFetched.arrayBuffer();
-                download(photoData, filename, "application/octet-stream");
+                download(photoData, filename, "image/jpeg");
             })
         }
 
