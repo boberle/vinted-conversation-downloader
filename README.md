@@ -47,6 +47,11 @@ Here is the beginning of an example of a tracking file:
 ![](doc/imgs/sample_shipment_json.png)
 
 
+## How does it work?
+
+You can find more about how it works on the Python version of this extension on [Github](https://github.com/boberle/vinted-downloader).
+
+
 ## Installation from the source
 
 You can download the GitHub repository, check/modify the code, and then run it in Firefox:
